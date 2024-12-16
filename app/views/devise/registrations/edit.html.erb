@@ -1,43 +1,67 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class= "form_wrapper">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class= "form_title_box">
+    <span class= "form_title">新規登録</span>
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, class: "form") do |f| %>
+    <%= render "error", { model: resource } %>
+
+    <div class= "form_group">
+      <div class= "form_label_box">
+        <div class= "form_label"><%= f.label :nickname %></div>
+        <div class= "form_required">必須</div>
+      </div>
+      <%= f.text_field :nickname, autofocus: true, class: "form_textfield", placeholder: "例）タスク佑" %>
+    </div>
+
+    <div class= "form_group">
+      <div class= "form_label_box">
+        <div class= "form_label"><%= f.label :email %></div>
+        <div class= "form_required">必須</div>
+      </div>
+      <%= f.email_field :email, autocomplete: "email", class: "form_textfield", placeholder: "例）task@task.com" %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class= "form_group">
+      <div class= "form_label_box">
+        <div class= "form_label"><%= f.label :password %> <i>(leave blank if you don't want to change it)</i></div>
+        <% if @minimum_password_length %>
+          <em style= "margin-left: 5px;">(<%= @minimum_password_length %> 文字以上)</em>
+        <% end %>
+      </div>
+
+      <%= f.password_field :password, autocomplete: "new-password", class: "form_textfield" %>
+    </div>
+
+    <div class= "form_group">
+      <div class= "form_label_box">
+        <div class= "form_label"><%= f.label :password_confirmation %></div>
+      </div>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form_textfield" %>
+    </div>
+
+    <div class= "form_group">
+      <div class= "form_label_box">
+        <div class= "form_label"><%= f.label :current_password %><i>(we need your current password to confirm your changes)</i></div>
+        <div class= "form_required">必須</div>
+      </div>
+      <%= f.password_field :current_password, autocomplete: "current-password", class: "form_textfield" %>
+    </div>
+
+    <div class= "form_commit_box">
+      <%= f.submit "更新", class: "form_commit" %>
+    </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+  <h3>Cancel my account</h3>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+  <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+  <%= link_to "Back", :back %>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>
