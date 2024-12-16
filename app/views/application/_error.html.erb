@@ -1,0 +1,10 @@
+<% if model && model.errors.any? %>
+  <div class="error_box">
+    <div class="error_title">以下のエラーを解決してください</div>
+    <ul class="errors">
+      <% model.errors.full_messages.each do |message| %>
+        <li class="error"><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

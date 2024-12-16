@@ -1,0 +1,18 @@
+.error_box{
+  background-color: #f6bfbc;
+  padding: 20px;
+  border-radius: 20px;
+}
+.error_title{
+  font-size: 14px;
+  font-weight: bold;
+  color: red;
+}
+.errors{
+  margin-top: 10px;
+}
+.error{
+  list-style: inside;
+  color: red;
+  margin-bottom: 5px;
+}
