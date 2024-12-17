@@ -1,0 +1,33 @@
+<%= form_with model: @task, local: true, class: "form" do |f| %>
+
+  <%= render "error", { model: @task } %>
+
+  <div class= "form_group">
+    <div class= "form_label_box">
+      <div class= "form_label"><%= f.label :title %></div>
+      <div class= "form_required">必須</div>
+    </div>
+    <%= f.text_field :title, autofocus: true, class: "form_textfield", placeholder: "例）資料作成" %>
+  </div>
+
+  <div class= "form_group">
+    <div class= "form_label_box">
+      <div class= "form_label"><%= f.label :description %></div>
+    </div>
+    <%= f.text_area :description, class: "form_textarea", rows: 8, placeholder: "例）来月のプレゼン資料の作成" %>
+  </div>
+
+  <div class= "form_group">
+    <div class= "form_label_box">
+      <div class= "form_label"><%= f.label :deadline %></div>
+    </div>
+    <%= f.date_field :deadline, class: "form_textfield" %>
+  </div>
+
+  
+
+  <div class= "form_commit_box">
+    <%= f.submit commit_text, class: "form_commit" %>
+  </div>
+
+<% end %>
