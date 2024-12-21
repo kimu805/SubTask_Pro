@@ -11,6 +11,7 @@ class TasksController < ApplicationController
   end
 
   def create
+    binding.pry
     @task = current_user.tasks.build(task_params)
     if @task.save
       redirect_to @task, notice: "「#{@task.title}」を作成しました"
