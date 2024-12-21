@@ -11,7 +11,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    binding.pry
     @task = current_user.tasks.build(task_params)
     if @task.save
       redirect_to @task, notice: "「#{@task.title}」を作成しました"
@@ -42,7 +41,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :deadline).merge(priority: @task.find_or_create_by(current_user, params[:task][:priority]))
+    params.require(:task).permit(:title, :description, :deadline).merge(priority: Task.find_or_create_priority(current_user, params[:task][:priority]))
   end
 
   def set_task
