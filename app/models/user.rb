@@ -7,4 +7,7 @@ class User < ApplicationRecord
   # association
   has_many :tasks, dependent: :destroy
   has_many :priorities, dependent: :destroy
+
+  # enum
+  enum role: { free: "free", paid: "paid", admin: "admin" }, _default: "free"
 end
