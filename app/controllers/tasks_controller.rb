@@ -41,7 +41,8 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :deadline).merge(priority_id: Task.find_or_create_priority(current_user, params[:task][:priority]))
+    priority = Task.find_or_create_priority(current_user, params[:task][:priority])
+    params.require(:task).permit(:title, :description, :deadline).merge(priority_id: priority.id)
   end
 
   def set_task
