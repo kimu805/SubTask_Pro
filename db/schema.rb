@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_21_100625) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_22_111414) do
   create_table "priorities", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id", null: false
