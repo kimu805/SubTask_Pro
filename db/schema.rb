@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_22_111414) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_22_113405) do
   create_table "priorities", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id", null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_22_111414) do
 
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "nickname", null: false
-    t.integer "role"
+    t.string "role", default: "free"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
