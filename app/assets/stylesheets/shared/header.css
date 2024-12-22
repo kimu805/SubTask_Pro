@@ -1,0 +1,51 @@
+/* flash_message ***************************************************************************************************************************************/
+
+.flash-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%); /* 中央に配置するために左に半分ずらす */
+  padding: 15px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* 初期状態で非表示 */
+  transform: translate(-50%, -20px); /* 初期状態で上に移動し、中央揃え */
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 1000;
+}
+
+/* 表示するためのスタイル */
+.flash-message.show {
+  opacity: 1;
+  transform: translate(-50%, 0); /* 上部に固定し、中央に配置 */
+}
+
+/* 非表示にするためのスタイル */
+.flash-message.hide {
+  animation: fadeOut 0.6s forwards;
+}
+
+/* フェードアウトアニメーション */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+}
+
+/* 成功メッセージ */
+.flash-message.notice {
+  background-color: #28a745; /* 成功のグリーン */
+}
+
+/* エラーメッセージ */
+.flash-message.alert {
+  background-color: #dc3545; /* エラーのレッド */
+}
