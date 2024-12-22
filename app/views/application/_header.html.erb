@@ -1,0 +1,8 @@
+<% if flash[:notice] || flash[:alert] %>
+  <div id="flash-message" class="flash-message <%= flash[:notice] ? "notice" : "alert" %>">
+    <span class="icon">
+      <%= (flash[:notice] ? "&#x2714;" : "&#x26A0;").html_safe %> <!-- アイコン -->
+      <%= flash[:notice] || flash[:alert] %>
+    </span>
+  </div>
+<% end %>
