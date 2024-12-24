@@ -3,5 +3,5 @@ class Subscription < ApplicationRecord
   belongs_to :user
 
   # enum
-  enum status: { active: "active", canceled: "canceled" }
+  enum :status, [ :active, :canceled ]
 end
