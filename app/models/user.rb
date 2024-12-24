@@ -9,5 +9,5 @@ class User < ApplicationRecord
   has_many :priorities, dependent: :destroy
 
   # enum
-  enum role: { free: "free", paid: "paid", admin: "admin" }, _default: "free"
+  enum :role, [ :free, :paid, :admin ]
 end
