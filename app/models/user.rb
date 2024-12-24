@@ -7,6 +7,7 @@ class User < ApplicationRecord
   # association
   has_many :tasks, dependent: :destroy
   has_many :priorities, dependent: :destroy
+  has_one :subscription
 
   # enum
   enum :role, [ :free, :paid, :admin ]
