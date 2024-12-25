@@ -1,24 +1,29 @@
 class SubscriptionsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def new
     gon.public_key = ENV["STRIPE_TEST_PUBLISHABLE_KEY"]
     @price_id = ENV["STRIPE_TEST_PRICE_ID"]
   end
 
   def create
+    price_id = ENV["STRIPE_TEST_PRICE_ID"]
     customer = Stripe::Customer.create(
       email: current_user.email,
       payment_method: params[:payment_method_id],
       invoice_settings: { default_payment_method: params[:payment_method_id] }
     )
+    puts params.inspect()
     subscription = Stripe::Subscription.create(
       customer: customer.id,
-      items: [ { price: params[:price_id] } ],
+      items: [ { price: price_id } ],
       payment_settings: { payment_method_types: [ "card" ] }
     )
     current_user.subscription.create(
       stripe_subscription_id: subscription.id,
       status: subscription.status
     )
+    redirect_to root_path, notice: "サブスクリプションを開始しました"
     # customer = Stripe::Customer.create(email: current_user.email, source: params[:stripeToken])
     # subscription = Stripe::Subscription.create({
     #   customer: customer.id,
@@ -32,7 +37,6 @@ class SubscriptionsController < ApplicationController
     #   stripe_subscription_id: subscription.id,
     #   status: subscription.status
     # )
-    redirect_to root_path, notice: "サブスクリプションを開始しました"
   end
 
   def destroy
