@@ -1,4 +1,5 @@
 <%= form_with url: subscriptions_path, method: :post, id: "payment_form", local: true do %>
+  <div id="card_element_field"></div>
   <%= hidden_field_tag :price_id, @price_id  %>
   <%= submit_tag "サブスクを開始"  %>
 <% end %>
