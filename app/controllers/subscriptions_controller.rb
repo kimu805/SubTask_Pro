@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
   def new
+    @price_id = ENV["STRIPE_TEST_PRICE_ID"]
   end
 
   def create
