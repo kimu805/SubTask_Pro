@@ -9,7 +9,7 @@ function stripe() {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault()
-    const { paymentMethod, error} = await stripe.createPaymentMethod({
+    const { paymentMethod, error } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
     })
@@ -18,7 +18,7 @@ function stripe() {
       console.error(error)
     } else {
       const formData = new FormData()
-      formData.append("payment_method_id", paymentMethod,id)
+      formData.append("payment_method_id", paymentMethod.id)
       fetch("/subscriptions", {
         method: "POST",
         body: formData
