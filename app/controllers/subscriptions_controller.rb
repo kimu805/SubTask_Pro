@@ -19,24 +19,14 @@ class SubscriptionsController < ApplicationController
       items: [ { price: price_id } ],
       payment_settings: { payment_method_types: [ "card" ] }
     )
-    current_user.subscription.create(
+    puts subscription.inspect()
+    Subscription.create!(
+      user_id: current_user.id,
       stripe_subscription_id: subscription.id,
-      status: subscription.status
+      status: subscription["status"],
+      started_at: Date.today
     )
     redirect_to root_path, notice: "サブスクリプションを開始しました"
-    # customer = Stripe::Customer.create(email: current_user.email, source: params[:stripeToken])
-    # subscription = Stripe::Subscription.create({
-    #   customer: customer.id,
-    #   items: [ { price: params[:price_id] } ]
-    # })
-    # Stripe::Subscription.update(
-    #   subscription.id,
-    #   { payment_settings: { payment_method_types: [ "card", "customer_balance" ] } }
-    # )
-    # current_user.subscription.create(
-    #   stripe_subscription_id: subscription.id,
-    #   status: subscription.status
-    # )
   end
 
   def destroy
