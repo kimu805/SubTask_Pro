@@ -1,22 +1,37 @@
 class SubscriptionsController < ApplicationController
   def new
+    gon.public_key = ENV["STRIPE_TEST_PUBLISHABLE_KEY"]
     @price_id = ENV["STRIPE_TEST_PRICE_ID"]
   end
 
   def create
-    customer = Stripe::Customer.create(email: current_user.email, source: params[:stripeToken])
-    subscription = Stripe::Subscription.create({
+    customer = Stripe::Customer.create(
+      email: current_user.email,
+      payment_method: params[:payment_method_id],
+      invoice_settings: { default_payment_method: params[:payment_method_id] }
+    )
+    subscription = Stripe::Subscription.create(
       customer: customer.id,
-      items: [ { price: params[:price_id] } ]
-    })
-    Stripe::Subscription.update(
-      subscription.id,
-      { payment_settings: { payment_method_types: [ "card", "customer_balance" ] } }
+      items: [ { price: params[:price_id] } ],
+      payment_settings: { payment_method_types: [ "card" ] }
     )
     current_user.subscription.create(
       stripe_subscription_id: subscription.id,
       status: subscription.status
     )
+    # customer = Stripe::Customer.create(email: current_user.email, source: params[:stripeToken])
+    # subscription = Stripe::Subscription.create({
+    #   customer: customer.id,
+    #   items: [ { price: params[:price_id] } ]
+    # })
+    # Stripe::Subscription.update(
+    #   subscription.id,
+    #   { payment_settings: { payment_method_types: [ "card", "customer_balance" ] } }
+    # )
+    # current_user.subscription.create(
+    #   stripe_subscription_id: subscription.id,
+    #   status: subscription.status
+    # )
     redirect_to root_path, notice: "サブスクリプションを開始しました"
   end
 
