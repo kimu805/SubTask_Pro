@@ -9,6 +9,10 @@ class SubscriptionsController < ApplicationController
       customer: customer.id,
       items: [ { price: params[:price_id] } ]
     })
+    Stripe::Subscription.update(
+      subscription.id,
+      { payment_settings: { payment_method_types: [ "card", "customer_balance" ] } }
+    )
     current_user.subscription.create(
       stripe_subscription_id: subscription.id,
       status: subscription.status
