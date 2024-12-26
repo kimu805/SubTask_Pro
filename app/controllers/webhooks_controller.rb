@@ -7,7 +7,7 @@ class WebhooksController < ApplicationController
 
     begin
       event = Stripe::Event.construct_from(JSON.parse(payload))
-    rescue JSON::ParserError => e
+    rescue JSON::ParserError
       render json: { message: "Invalid payload" }, status: 400
       return
     end
