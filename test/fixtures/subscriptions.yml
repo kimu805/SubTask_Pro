@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  stripe_sbscription_id: MyString
+  status: MyString
+  started_at: 2024-12-24
+
+two:
+  user: two
+  stripe_sbscription_id: MyString
+  status: MyString
+  started_at: 2024-12-24

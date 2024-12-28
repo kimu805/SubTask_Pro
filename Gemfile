@@ -64,3 +64,5 @@ end
 
 gem "devise"
 gem "pry-rails"
+gem "stripe"
+gem "gon"

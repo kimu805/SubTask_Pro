@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_22_113405) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_24_023220) do
   create_table "priorities", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_priorities_on_user_id"
+  end
+
+  create_table "subscriptions", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "stripe_subscription_id"
+    t.string "status"
+    t.date "started_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "tasks", charset: "utf8", force: :cascade do |t|
@@ -46,6 +56,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_22_113405) do
   end
 
   add_foreign_key "priorities", "users"
+  add_foreign_key "subscriptions", "users"
   add_foreign_key "tasks", "priorities"
   add_foreign_key "tasks", "users"
 end
