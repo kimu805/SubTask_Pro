@@ -26,7 +26,7 @@ class SubscriptionsController < ApplicationController
       status: subscription["status"],
       started_at: Date.today
     )
-    redirect_to root_path, notice: "サブスクリプションを開始しました"
+    redirect_to root_path, notice: "サブスクリプションを開始しました。"
   end
 
   def destroy
