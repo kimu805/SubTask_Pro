@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   resources :tasks
   resources :subscriptions, only: %i[new create destroy]
 
-  get "up" => "rails/health#show", as: :rails_health_check
+  # get "up" => "rails/health#show", as: :rails_health_check
   post "/webhooks/stripe", to: "webhooks#stripe"
 end
